@@ -1,4 +1,4 @@
-apps-pi.cdv.securedeviceidentifier
+securedeviceidentifier
 ==================================
 
 ...
