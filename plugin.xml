@@ -9,18 +9,7 @@
     <js-module src="www/SecureDeviceIdentifier.js" name="SecureDeviceIdentifier">
         <clobbers target="SecureDeviceIdentifier" />
     </js-module>
-    
-    <!-- 
-    <platform name="android">
-        <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="SecureDeviceIdentifier"> 
-                <param name="android-package" value="org.apache.cordova.core.SecureDeviceIdentifier"/>
-            </feature>
-        </config-file>
-    
-        <source-file src="src/android/SecureDeviceIdentifier.java" target-dir="src/org/apache/cordova/core" />
-    </platform> -->
-    
+        
     <!-- ios -->
     <platform name="ios">            
         <config-file target="config.xml" parent="/*">
@@ -31,31 +20,11 @@
     
         <header-file src="src/ios/SecureDeviceIdentifier.h" />
 	    <source-file src="src/ios/SecureDeviceIdentifier.m" />
-        <header-file src="src/ios/SecureUDID/SecureUDID.h"/> <!--  framework="true" /> -->
-        <source-file src="src/ios/SecureUDID/SecureUDID.m"/> <!--  framework="true" /> -->
+        <resource-file src="src/ios/SecureUDID"/> 
+        <header-file src="src/ios/SecureUDID/SecureUDID.h"/> 
+        <source-file src="src/ios/SecureUDID/SecureUDID.m"/> 
 	    	    
     </platform>
 
-    <!-- 
-    <platform name="wp7">
-        <config-file target="config.xml" parent="/*">
-            <feature name="SecureDeviceIdentifier">
-                <param name="wp-package" value="SecureDeviceIdentifier"/>
-            </feature>
-        </config-file>
-    
-        <source-file src="src/wp/SecureDeviceIdentifier.cs" />
-    </platform>
-
-    <platform name="wp8">
-        <config-file target="config.xml" parent="/*">
-            <feature name="SecureDeviceIdentifier">
-                <param name="wp-package" value="SecureDeviceIdentifier"/>
-            </feature>
-        </config-file>
-    
-        <source-file src="src/wp/SecureDeviceIdentifier.cs" />
-    </platform>
-         -->
 
 </plugin>
