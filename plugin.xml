@@ -7,11 +7,8 @@
     <name>SecureDeviceIdentifier</name>
 
     <js-module src="www/SecureDeviceIdentifier.js" name="SecureDeviceIdentifier">
-        <!-- <clobbers target="window.open" /> -->
+        <clobbers target="SecureDeviceIdentifier" />
     </js-module>
-
-    <!-- <dependency id="com.plugin.id" url="https://github.com/myuser/someplugin" commit="428931ada3891801" subdir="some/path/here" /> -->
-
     
     <!-- 
     <platform name="android">
@@ -28,7 +25,7 @@
     <platform name="ios">            
         <config-file target="config.xml" parent="/*">
             <feature name="SecureDeviceIdentifier">
-                <param name="ios-package" value="CDVSecureDeviceIdentifier" /> 
+                <param name="ios-package" value="SecureDeviceIdentifier" /> 
             </feature>
         </config-file>
     
