@@ -15,19 +15,24 @@
 
 - (void)get:(CDVInvokedUrlCommand*)command {
 
-	self.callbackId = command.callbackId;
-	NSDictionary *options = [command.arguments objectAtIndex:0];
+	[self.commandDelegate runInBackground:^{
 
-	// Compiling options with defaults
-	NSString *domain = [options objectForKey:@"domain"] ?: @"";
-	NSString *key = [options objectForKey:@"key"] ?: @"";
-	self.secureUDID = [SecureUDID UDIDForDomain:domain usingKey:key];
-	//NSLog(@"self.secureUDID %@", self.secureUDID);
+		self.callbackId = command.callbackId;
+		NSDictionary *options = [command.arguments objectAtIndex:0];
 
-	// Create Plugin Result
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.secureUDID];
-	// Call  the Success Javascript function
-	[self writeJavascript: [pluginResult toSuccessCallbackString:self.callbackId]];
+		// Compiling options with defaults
+		NSString *domain = [options objectForKey:@"domain"] ?: @"";
+		NSString *key = [options objectForKey:@"key"] ?: @"";
+		self.secureUDID = [SecureUDID UDIDForDomain:domain usingKey:key];
+		//NSLog(@"self.secureUDID %@", self.secureUDID);
+
+		// Create Plugin Result
+		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.secureUDID];
+		// Call  the Success Javascript function
+		[self writeJavascript: [pluginResult toSuccessCallbackString:self.callbackId]];
+
+	}];
+
 
 }
 
