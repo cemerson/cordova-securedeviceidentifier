@@ -14,24 +14,24 @@
 @synthesize callbackId = _callbackId, secureUDID = _secureUDID;
 
 - (void)get:(CDVInvokedUrlCommand*)command {
+	
+	self.callbackId = command.callbackId;	
 
-	[self.commandDelegate runInBackground:^{
-
-		self.callbackId = command.callbackId;
-		NSDictionary *options = [command.arguments objectAtIndex:0];
-
-		// Compiling options with defaults
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{  
+		//[self.commandDelegate runInBackground:^{
+		NSDictionary *options = [command.arguments objectAtIndex:0];	
 		NSString *domain = [options objectForKey:@"domain"] ?: @"";
 		NSString *key = [options objectForKey:@"key"] ?: @"";
-		self.secureUDID = [SecureUDID UDIDForDomain:domain usingKey:key];
-		//NSLog(@"self.secureUDID %@", self.secureUDID);
+		self.secureUDID = [SecureUDID UDIDForDomain:domain usingKey:key]; //NSLog(@"self.secureUDID %@", self.secureUDID);
 
-		// Create Plugin Result
-		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.secureUDID];
-		// Call  the Success Javascript function
-		[self writeJavascript: [pluginResult toSuccessCallbackString:self.callbackId]];
+		dispatch_async(dispatch_get_main_queue(), ^(void) {
+			// Create Plugin Result
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.secureUDID];
+			// Call  the Success Javascript function
+			[self writeJavascript: [pluginResult toSuccessCallbackString:self.callbackId]];
+	    });
+	});
 
-	}];
 
 
 }
