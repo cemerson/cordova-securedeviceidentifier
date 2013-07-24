@@ -39,4 +39,4 @@
 
 })(window.cordova || window.Cordova);
 
-/* DEBUG */ // alert('SDI js loaded...')
+/* DEBUG */ window.console.log('SecureDeviceIdentifier.js loaded...');
