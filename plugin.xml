@@ -1,30 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
+//
+//  SecureDeviceIdentifier.m
+//
+// Created by Olivier Louvignes on 2012-05-31.
+//
+// Copyright 2012 Olivier Louvignes. All rights reserved.
+// MIT Licensed
 
-<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
-           id="org.apache.cordova.plugins.SecureDeviceIdentifier"
-      version="0.1.0">
+#import "SecureDeviceIdentifier.h"
+#import "SecureUDID.h"
 
-    <name>SecureDeviceIdentifier</name>
+@implementation SecureDeviceIdentifier
 
-    <js-module src="www/SecureDeviceIdentifier.js" name="SecureDeviceIdentifier">
-        <clobbers target="SecureDeviceIdentifier" />
-    </js-module>
-        
-    <!-- ios -->
-    <platform name="ios">            
-        <config-file target="config.xml" parent="/*">
-            <feature name="SecureDeviceIdentifier">
-                <param name="ios-package" value="SecureDeviceIdentifier" /> 
-            </feature>
-        </config-file>
-    
-        <header-file src="src/ios/SecureDeviceIdentifier.h" />
-	    <source-file src="src/ios/SecureDeviceIdentifier.m" />
-        <resource-file src="src/ios/SecureUDID"/> 
-        <header-file src="src/ios/SecureUDID/SecureUDID.h"/> 
-        <source-file src="src/ios/SecureUDID/SecureUDID.m"/> 
-	    	    
-    </platform>
+@synthesize callbackId = _callbackId, secureUDID = _secureUDID;
+
+- (void)get:(CDVInvokedUrlCommand*)command {
+	
+	self.callbackId = command.callbackId;	
+
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{  
+		//[self.commandDelegate runInBackground:^{
+		NSDictionary *options = [command.arguments objectAtIndex:0];	
+		NSString *domain = [options objectForKey:@"domain"] ?: @"";
+		NSString *key = [options objectForKey:@"key"] ?: @"";
+		self.secureUDID = [SecureUDID UDIDForDomain:domain usingKey:key]; //NSLog(@"self.secureUDID %@", self.secureUDID);
+
+		dispatch_async(dispatch_get_main_queue(), ^(void) {
+			// Create Plugin Result
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.secureUDID];
+			// Call  the Success Javascript function
+            
+            // cemerson: toSuccessCallbackString deprecated
+            //[self writeJavascript: [pluginResult  toSuccessCallbackString:self.callbackId]];
+            // fix: http://stackoverflow.com/a/28850592/826308
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+			
+	    });
+	});
 
 
-</plugin>
+
+}
+
+@end
