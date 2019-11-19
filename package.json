@@ -1,0 +1,20 @@
+{
+    "name": "cordova-plugin-SecureDeviceIdentifier",
+    "version": "0.1.1",
+    "description": "Cordova SecureDeviceIdentifier Plugin",
+    "main": "www/SecureDeviceIdentifier.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cemerson/cordova-securedeviceidentifier.git"
+    },
+    "keywords": [],
+    "author": "Original Dev / cemerson",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/cemerson/cordova-securedeviceidentifier/issues"
+    },
+    "homepage": "https://github.com/cemerson/cordova-securedeviceidentifier#readme"
+}
