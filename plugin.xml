@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- CE 20191119 | For some reason this file was overwritten by SecureDeviceIdentifier.m or something? Restoring last XML version -->
-<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
-           id="org.apache.cordova.plugins.SecureDeviceIdentifier"
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="cordova-plugin-SecureDeviceIdentifier"
       version="0.1.1">
-
-    <name>SecureDeviceIdentifier</name>
-
+    <name>SecureDeviceIdentifier</name>    
+    <description>Cordova SecureDeviceIdentifier Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,securedid,securedeviceidentifier</keywords>
+    <repo>https://github.com/cemerson/cordova-securedeviceidentifier.git</repo>
     <js-module src="www/SecureDeviceIdentifier.js" name="SecureDeviceIdentifier">
         <clobbers target="SecureDeviceIdentifier" />
     </js-module>
-
     <!-- ios -->
     <platform name="ios">            
         <config-file target="config.xml" parent="/*">
@@ -17,14 +17,10 @@
                 <param name="ios-package" value="SecureDeviceIdentifier" /> 
             </feature>
         </config-file>
-
         <header-file src="src/ios/SecureDeviceIdentifier.h" />
 	    <source-file src="src/ios/SecureDeviceIdentifier.m" />
         <resource-file src="src/ios/SecureUDID"/> 
         <header-file src="src/ios/SecureUDID/SecureUDID.h"/> 
         <source-file src="src/ios/SecureUDID/SecureUDID.m"/> 
-
     </platform>
-
-
 </plugin>
